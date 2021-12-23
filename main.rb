@@ -100,7 +100,7 @@ def create_rental(rentals, books, people)
   person_id = gets.chomp.to_i
   print 'Date: '
   date = gets.chomp
-  rental = Rental.new( people[person_id], books[book_id], date)
+  rental = Rental.new(people[person_id], books[book_id], date)
   rentals.push(rental)
   puts 'Rental created successfully'
   puts ''
