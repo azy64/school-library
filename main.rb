@@ -5,6 +5,7 @@ require './student'
 require './teacher'
 require './classroom'
 require './rental'
+require './welcome_message'
 
 def all_books(books)
   i = 0
@@ -116,18 +117,6 @@ def all_rental(rentals)
     puts " Date: #{rent&.date}, Book \" #{rent&.book&.title}\" by #{rent&.person&.name}" if rent.person&.id == id
     i += 1
   end
-end
-
-def welcome_message
-  puts 'wELCOME TO THE SCHOOL LIBRARY APP!'
-  puts 'Please choose an option by enterin a number:'
-  puts '1 - List all books'
-  puts '2 - List all people'
-  puts '3 - Create a person'
-  puts '4 - Create a book'
-  puts '5 - Create a rental'
-  puts '6 - List all rentals for a given person id'
-  puts '7 - Exit'
 end
 
 def options(response, books, people, rentals)
