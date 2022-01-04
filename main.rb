@@ -6,17 +6,8 @@ require './teacher'
 require './classroom'
 require './rental'
 require './options_message'
-
-def all_books(books)
-  i = 0
-  puts 'Here is the list of books:'
-  while i < books.length
-    book = books[i]
-    puts "Title: \"#{book.title}\", Author: #{book.author}"
-    i += 1
-  end
-  puts ''
-end
+require './manager_book'
+require './manager_rental'
 
 def all_person(people)
   i = 0
@@ -68,84 +59,33 @@ def create_person(people)
   puts 'Person created successfully'
 end
 
-def create_book(books)
-  print 'Title:'
-  title = gets.chomp
-  print 'Author:'
-  author = gets.chomp
-  book = Book.new(title, author)
-  books.push(book)
-  puts 'Book created successfully'
-end
-
-def loop_book(books)
-  i = 0
-  while i < books.length
-    book = books[i]
-    puts "#{i}) Title: \"#{book.title}\", Author: #{book.author}"
-    i += 1
-  end
-end
-
-def create_rental(rentals, books, people)
-  puts 'select a book from the following list by number'
-  loop_book(books)
-  book_id = gets.chomp.to_i
-  i = 0
-  puts 'select a person from the following list by number (not id)'
-  while i < people.length
-    person = people[i]
-    puts "#{i}) [#{person.class}]Name:  #{person&.name&.capitalize}, ID: #{person&.id}, Age: #{person&.age} "
-    i += 1
-  end
-  person_id = gets.chomp.to_i
-  print 'Date: '
-  date = gets.chomp
-  rental = Rental.new(people[person_id], books[book_id], date)
-  rentals.push(rental)
-  puts 'Rental created successfully'
-  puts ''
-end
-
-def all_rental(rentals)
-  print 'ID of person'
-  id = gets.chomp.to_i
-  puts 'Rentals:'
-  i = 0
-  while i < rentals.length
-    rent = rentals[i]
-    puts " Date: #{rent&.date}, Book \" #{rent&.book&.title}\" by #{rent&.person&.name}" if rent.person&.id == id
-    i += 1
-  end
-end
-
-def options(response, books, people, rentals)
+def options(response, book_manager, people, rental_manager)
   case response
   when 1
-    all_books(books)
+    book_manager.all_books
   when 2
     all_person(people)
   when 3
     create_person(people)
   when 4
-    create_book(books)
+    book_manager.create_book
   when 5
-    create_rental(rentals, books, people)
+    rental_manager.create_rental(book_manager.books, people)
   when 6
-    all_rental(rentals)
+    rental_manager.all_rental
   end
 end
 
 def main
   response = ''
-  books = []
+  book_manager = ManagerBook.new([])
+  rental_manager = ManagerRental.new([])
   people = []
-  rentals = []
   while response != 7
-    welcome_message
+    options_message
     print 'Please enter your choice:'
     response = gets.chomp.to_i
-    options(response, books, people, rentals)
+    options(response, book_manager, people, rental_manager)
   end
   puts 'Thank you of used the App, we hope to see you soon!'
 end

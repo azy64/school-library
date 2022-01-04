@@ -1,4 +1,4 @@
-def option_message
+def options_message
   puts 'wELCOME TO THE SCHOOL LIBRARY APP!'
   puts 'Please choose an option by enterin a number:'
   puts '1 - List all books'
