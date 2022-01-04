@@ -5,7 +5,7 @@ require './student'
 require './teacher'
 require './classroom'
 require './rental'
-require './welcome_message'
+require './options_message'
 
 def all_books(books)
   i = 0
