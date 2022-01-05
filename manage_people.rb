@@ -5,6 +5,8 @@ require './classroom'
 require './rental'
 
 class ManagePeople
+  attr_accessor :people
+
   def initialize(people = [])
     people_file = 'people.json'
 
@@ -16,7 +18,7 @@ class ManagePeople
     end
   end
 
-  def self.all_person(people)
+  def all_person(people)
     i = 0
 
     puts 'Here is the list of person:'
@@ -34,7 +36,7 @@ class ManagePeople
     puts ''
   end
 
-  def self.create_student
+  def create_student
     print 'Age:'
 
     age = gets.chomp.to_i
@@ -56,7 +58,7 @@ class ManagePeople
     student
   end
 
-  def self.create_teacher
+  def create_teacher
     print 'Age:'
 
     age = gets.chomp.to_i
@@ -80,7 +82,7 @@ class ManagePeople
     File.write('people.json', JSON.generate(@people)) unless @people.empty?
   end
 
-  def self.create_person
+  def create_person
     print 'Do you want to create a student (1) or a teacher (2) [Input the number]:'
 
     choice = gets.chomp.to_i

@@ -8,7 +8,7 @@ class ManagerBook
 
     if File.exist? book_file
       @books = books
-      JSON.parse(File.read(book_file)).each { |entrie| @books.push(entrie) }
+      JSON.parse(File.read(book_file)).each { |entrie| @books.push(entrie).to_json }
     else
       @books = []
     end

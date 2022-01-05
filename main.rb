@@ -9,18 +9,18 @@ require './options_message'
 require './manager_book'
 require './manager_rental'
 
-def options(response, book_manager, people, rental_manager)
+def options(response, book_manager, people_manager, rental_manager)
   case response
   when 1
     book_manager.all_books
   when 2
-    ManagePeople.all_person(people)
+    people_manager.all_person
   when 3
-    ManagePeople.create_person(people)
+    people_manager.create_person
   when 4
     book_manager.create_book
   when 5
-    rental_manager.create_rental(book_manager.books, people)
+    rental_manager.create_rental(book_manager.books, people_manager.people)
   when 6
     rental_manager.all_rental
   end
