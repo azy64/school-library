@@ -1,8 +1,21 @@
+require 'json'
+require './manager_book'
+require './manage_people'
+
 class ManagerRental
-  attr_accessor :rentals
+  attr_accessor :rentals, :rentals_json
 
   def initialize(rentals)
+    rentals_file = 'rentals.json'
+    @rentals_json = []
     @rentals = rentals
+    if File.exist? rentals_file
+      f = File.read(rentals_file)
+      json = JSON.parse(f) unless f.empty?
+      from_json(json)
+    else
+      @rentals = []
+    end
   end
 
   def all_rental
@@ -27,6 +40,11 @@ class ManagerRental
     end
   end
 
+  def save_data
+    rentals = to_json_obj
+    File.open('rentals.json', 'w') { |f| f.write rentals }
+  end
+
   def create_rental(books, people)
     puts 'select a book from the following list by number'
     loop_on(books)
@@ -45,5 +63,34 @@ class ManagerRental
     @rentals.push(rental)
     puts 'Rental created successfully'
     puts ''
+  end
+
+  def to_json_obj
+    i = 0
+    while i < @rentals.length
+      rent = @rentals[i]
+      b = {
+        'date' => rent.date,
+        'id_person' => rent.person.id,
+        'title_book' => rent.book.title
+      }
+      @rentals_json.push(b)
+      i += 1
+    end
+    @rentals_json.to_json
+  end
+
+  def from_json(data)
+    i = 0
+    people_manager = ManagePeople.new([])
+    book_manager = ManagerBook.new([])
+    while i < data.length
+      rent = data[i]
+      b = Rental.new(people_manager.take_person_id(rent['id_person']),
+                     book_manager.take_book_title(rent['title_book']),
+                     rent['date'])
+      @rentals.push(b)
+      i += 1
+    end
   end
 end

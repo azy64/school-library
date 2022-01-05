@@ -4,6 +4,9 @@ AllCops:
     - "Guardfile"
     - "Rakefile"
     - "node_modules/**/*"
+    - "./manager_book.rb"
+    - "./manager_rental.rb"
+    - "./manage_people.rb"
 
   DisplayCopNames: true
 
