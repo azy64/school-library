@@ -18,14 +18,14 @@ class ManagePeople
     end
   end
 
-  def all_person(people)
+  def all_person
     i = 0
 
     puts 'Here is the list of person:'
 
-    while i < people.length
+    while i < @people.length
 
-      person = people[i]
+      person = @people[i]
 
       puts "[#{person.class}]Name:  #{person&.name&.capitalize}, ID: #{person&.id}, Age: #{person&.age} "
 
