@@ -12,7 +12,6 @@ class ManagerBook
       f = File.read(book_file)
       unless f.empty?
         json = JSON.parse(f)
-        # json.each { |entrie| @books.push(entrie) } unless json.empty?
         from_json(json)
       end
     else
@@ -33,7 +32,6 @@ class ManagerBook
 
   def save_data
     obj = to_json_obj
-    # File.write('books.json', JSON.generate(obj)) unless @books.empty?
     File.open('books.json', 'w') { |f| f.write obj }
   end
 

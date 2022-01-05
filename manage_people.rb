@@ -83,7 +83,6 @@ class ManagePeople
 
   def save_data
     people = to_json_obj
-    # File.write('people.json', people) unless @people.empty?
     File.open('people.json', 'w') { |f| f.write people }
   end
 

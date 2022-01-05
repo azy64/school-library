@@ -41,7 +41,6 @@ class ManagerRental
   end
 
   def save_data
-    # File.write('rentals.json', JSON.generate(@rentals)) unless @rentals.empty?
     rentals = to_json_obj
     File.open('rentals.json', 'w') { |f| f.write rentals }
   end
