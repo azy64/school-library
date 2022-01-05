@@ -1,12 +1,21 @@
 require './student'
-
+require 'json'
 require './teacher'
-
 require './classroom'
-
 require './rental'
 
 class ManagePeople
+  def initialize(people = [])
+    people_file = 'people.json'
+
+    if File.exist? people_file
+      @people = people
+      JSON.parse(File.read(people_file)).each { |entrie| @people.push(entrie) }
+    else
+      @people = []
+    end
+  end
+
   def self.all_person(people)
     i = 0
 
@@ -67,7 +76,11 @@ class ManagePeople
     teacher
   end
 
-  def self.create_person(people)
+  def save_data
+    File.write('people.json', JSON.generate(@people)) unless @people.empty?
+  end
+
+  def self.create_person
     print 'Do you want to create a student (1) or a teacher (2) [Input the number]:'
 
     choice = gets.chomp.to_i
@@ -78,13 +91,13 @@ class ManagePeople
 
       student = create_student
 
-      people.push(student)
+      @people.push(student)
 
     when 2
 
       teacher = create_teacher
 
-      people.push(teacher)
+      @people.push(teacher)
 
     end
 

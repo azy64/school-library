@@ -1,8 +1,17 @@
+require 'json'
+
 class ManagerRental
   attr_accessor :rentals
 
   def initialize(rentals)
-    @rentals = rentals
+    rentals_file = 'rentals.json'
+
+    if File.exist? rentals_file
+      @rentals = rentals
+      JSON.parse(File.read(rentals_file)).each { |entrie| @rentals.push(entrie) }
+    else
+      @rentals = []
+    end
   end
 
   def all_rental
@@ -25,6 +34,10 @@ class ManagerRental
       puts "#{i}) Title: \"#{book.title}\", Author: #{book.author}"
       i += 1
     end
+  end
+
+  def save_data
+    File.write('rentals.json', JSON.generate(@rentals)) unless @rentals.empty?
   end
 
   def create_rental(books, people)

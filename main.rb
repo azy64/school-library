@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 
 require './book'
+require 'json'
 require_relative 'manage_people'
 require './classroom'
 require './rental'
@@ -29,13 +30,17 @@ def main
   response = ''
   book_manager = ManagerBook.new([])
   rental_manager = ManagerRental.new([])
-  people = []
+  people_manager = ManagePeople.new([])
+
   while response != 7
     options_message
     print 'Please enter your choice:'
     response = gets.chomp.to_i
-    options(response, book_manager, people, rental_manager)
+    options(response, book_manager, people_manager, rental_manager)
   end
+  book_manager.save_data
+  rental_manager.save_data
+  people_manager.save_data
   puts 'Thank you of used the App, we hope to see you soon!'
 end
 
