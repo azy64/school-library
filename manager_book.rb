@@ -32,7 +32,7 @@ class ManagerBook
 
   def save_data
     obj = to_json_obj
-    File.open('books.json', 'w') { |f| f.write obj }
+    File.open('books.json', 'w', &:read) { |f| f.write obj }
   end
 
   # this method create a new book
