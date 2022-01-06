@@ -7,6 +7,7 @@ AllCops:
     - "./manager_book.rb"
     - "./manager_rental.rb"
     - "./manage_people.rb"
+    - "./.rspec"
 
   DisplayCopNames: true
 
