@@ -1,25 +1,25 @@
 class Solver
-  def factoria(n)
+  def factoria(num)
     f = 1
-    (1..n).each do |i|
+    (1..num).each do |i|
       f *= i
     end
     f
   end
 
-  def reverser_string(n)
-    n.reverse
+  def reverser_string(alpa)
+    alpa.reverse
   end
 
-  def fizzbuzz(n)
-    if n % 3 == 0
+  def fizzbuzz(number)
+    if (number % 3).zero?
       'Fizz'
-    elsif n % 5 == 0
+    elsif (number % 5).zero?
       'Buzz'
-    elsif n % 5 == 0 and n % 3 == 0
+    elsif (number % 5).zero? and (number % 3).zero?
       'FizzBuzz'
     else
-      n
+      number
     end
   end
 end
