@@ -1,10 +1,12 @@
 class Solver
   def factoria(num)
-    f = 1
-    (1..num).each do |i|
-      f *= i
+    if num.zero?
+      1
+    elsif num.negative?
+      'exception'
+    else
+      num * factoria(num - 1)
     end
-    f
   end
 
   def reverser_string(alpa)
@@ -12,12 +14,12 @@ class Solver
   end
 
   def fizzbuzz(number)
-    if (number % 3).zero?
-      'Fizz'
+    if (number % 5).zero? and (number % 3).zero?
+      'FizzBuzz'
     elsif (number % 5).zero?
       'Buzz'
-    elsif (number % 5).zero? and (number % 3).zero?
-      'FizzBuzz'
+    elsif (number % 3).zero?
+      'Fizz'
     else
       number
     end
